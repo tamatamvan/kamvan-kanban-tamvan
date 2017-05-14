@@ -1,14 +1,14 @@
 <template lang="jade">
   div(id="sign-in-up")
     h1 KAMVAN - The Simple Kanban Tamvan!
-    Row(type="flex" justify="center" align="middle")
+    Row(type="flex", justify="center", align="middle")
       Col(span="8")
         Card
           Tabs(value="sign-in")
-            Tab-pane(label="Sign In" name="sign-in")
+            Tab-pane(label="Sign In", name="sign-in")
               FormSignIn
 
-            Tab-pane(label="Sign Up" name="sign-up")
+            Tab-pane(label="Sign Up", name="sign-up")
               FormSignUp
 </template>
 

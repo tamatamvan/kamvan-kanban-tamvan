@@ -1,10 +1,10 @@
 <template lang="jade">
-  Form(ref="formSignIn" v-bind:model="formSignIn" v-bind:rules="ruleSignIn")
+  Form(ref="formSignIn", :model="formSignIn", :rules="ruleSignIn")
     Form-item(prop="email")
       Input(v-model="formSignIn.email" type="text" placeholder="Your Email Address")
         span(slot="prepend")
           Icon(type="at")
-            
+
     Form-item(prop="password")
       Input(v-model="formSignIn.password" type="password" placeholder="Your password")
         span(slot="prepend")

@@ -1,6 +1,17 @@
 <template lang="jade">
   #board
-    h1 KamVan Board
+    Row(type="flex", justify="space-between", align="middle")
+      Col
+        h1 KamVan Board
+      Col
+        Button(type="primary", @click="newTaskModal = true") New Task
+
+    Modal(v-model="newTaskModal",
+      title="New Task",
+      okText="Save",
+      cancelText="Cancel",
+      @on-ok="ok",
+      @on-cancel="cancel")
 
     Row(v-bind:gutter="16")
       Col(span=6)
@@ -19,6 +30,19 @@ import BoardSection from './BoardSection'
 export default {
   components: {
     BoardSection
+  },
+  data () {
+    return {
+      newTaskModal: false
+    }
+  },
+  methods: {
+    ok () {
+      this.$Message.info('Ok!')
+    },
+    cancel () {
+      this.$Message.info('Bye!')
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template lang="jade">
-  Form(v-bind:model="formSignUp" v-bind:rules="ruleSignUp" ref="formSignUp")
+  Form(:model="formSignUp", :rules="ruleSignUp", ref="formSignUp")
     Form-item(prop="name")
       Input(v-model="formSignUp.name" type="text" placeholder="Your Full Name")
           span(slot="prepend")
