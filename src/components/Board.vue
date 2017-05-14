@@ -6,12 +6,7 @@
       Col
         Button(type="primary", @click="newTaskModal = true") New Task
 
-    Modal(v-model="newTaskModal",
-      title="New Task",
-      okText="Save",
-      cancelText="Cancel",
-      @on-ok="ok",
-      @on-cancel="cancel")
+    FormNewTask(:show="newTaskModal", @close="newTaskModal = false")
 
     Row(v-bind:gutter="16")
       Col(span=6)
@@ -27,21 +22,15 @@
 
 <script>
 import BoardSection from './BoardSection'
+import FormNewTask from './FormNewTask'
 export default {
   components: {
-    BoardSection
+    BoardSection,
+    FormNewTask
   },
   data () {
     return {
       newTaskModal: false
-    }
-  },
-  methods: {
-    ok () {
-      this.$Message.info('Ok!')
-    },
-    cancel () {
-      this.$Message.info('Bye!')
     }
   }
 }
