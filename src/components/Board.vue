@@ -9,14 +9,14 @@
     FormNewTask(:show="newTaskModal", @close="newTaskModal = false")
 
     Row(v-bind:gutter="16")
-      Col(span=6)
-        BoardSection(title="Un-Assigned Task")
-      Col(span=6)
-        BoardSection(title="To-Do")
-      Col(span=6)
-        BoardSection(title="Doing")
-      Col(span=6)
-        BoardSection(title="Done")
+      Col(:xs="24", :sm="24", :md="6", :lg="6")
+        BoardSection(title="Un-Assigned Task", :tasks="tasks")
+      Col(:xs="24", :sm="24", :md="6", :lg="6")
+        BoardSection(title="To-Do", :tasks="tasks")
+      Col(:xs="24", :sm="24", :md="6", :lg="6")
+        BoardSection(title="Doing", :tasks="tasks")
+      Col(:xs="24", :sm="24", :md="6", :lg="6")
+        BoardSection(title="Done", :tasks="tasks")
 
 </template>
 
@@ -30,7 +30,27 @@ export default {
   },
   data () {
     return {
-      newTaskModal: false
+      newTaskModal: false,
+      tasks: [
+        {
+          title: 'Task title 1',
+          desc: 'Task Description 1',
+          point: 10,
+          assignedTo: 'someone'
+        },
+        {
+          title: 'Task title 2',
+          desc: 'Task Description 2',
+          point: 10,
+          assignedTo: 'someone'
+        },
+        {
+          title: 'Task title 2',
+          desc: 'Task Description 2',
+          point: 10,
+          assignedTo: 'someone'
+        }
+      ]
     }
   }
 }
