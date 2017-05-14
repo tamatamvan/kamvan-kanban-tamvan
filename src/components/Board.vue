@@ -2,23 +2,24 @@
   #board
     h1 KamVan Board
 
-    Row(:gutter="16")
+    Row(v-bind:gutter="16")
       Col(span=6)
-        Card
-          p(slot="title") Un-Assigned Task
+        BoardSection(title="Un-Assigned Task")
       Col(span=6)
-        Card
-          p(slot="title") To-Do
+        BoardSection(title="To-Do")
       Col(span=6)
-        Card
-          p(slot="title") Doing
+        BoardSection(title="Doing")
       Col(span=6)
-        Card
-          p(slot="title") Done
+        BoardSection(title="Done")
+
 </template>
 
 <script>
+import BoardSection from './BoardSection'
 export default {
+  components: {
+    BoardSection
+  }
 }
 </script>
 

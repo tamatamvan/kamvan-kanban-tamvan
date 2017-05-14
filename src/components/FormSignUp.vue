@@ -1,28 +1,27 @@
-<template lang="html">
-  <Form ref="formSignUp" :model="formSignUp" :rules="ruleSignUp">
-    <Form-item prop="name">
-      <Input v-model="formSignUp.name" type="text" placeholder="Your Full Name">
-          <span slot="prepend"><Icon type="person"></Icon></span>
-      </Input>
-    </Form-item>
-    <Form-item prop="email">
-      <Input v-model="formSignUp.email" type="text" placeholder="Your Email Address">
-          <span slot="prepend"><Icon type="at"></Icon></span>
-      </Input>
-    </Form-item>
-    <Form-item prop="password">
-      <Input v-model="formSignUp.password" type="password" placeholder="Your password">
-          <span slot="prepend"><Icon type="locked"></Icon></span>
-      </Input>
-    </Form-item>
-    <Form-item prop="passwordCheck">
-      <Input v-model="formSignUp.passwordCheck" type="password" placeholder="Enter Your Password confirmation">
-          <span slot="prepend"><Icon type="locked"></Icon></span>
-      </Input>
-    </Form-item>
-    <Button type="primary" @click="handleSubmit('formSignUp')">Sign Up</Button>
-    <Button type="ghost" @click="handleReset('formSignUp')">Cancel</Button>
-  </Form>
+<template lang="jade">
+  Form(v-bind:model="formSignUp" v-bind:rules="ruleSignUp" ref="formSignUp")
+    Form-item(prop="name")
+      Input(v-model="formSignUp.name" type="text" placeholder="Your Full Name")
+          span(slot="prepend")
+            Icon(type="person")
+
+    Form-item(prop="email")
+      Input(v-model="formSignUp.email" type="text" placeholder="Your Email Address")
+        span(slot="prepend")
+          Icon(type="at")
+
+    Form-item(prop="password")
+      Input(v-model="formSignUp.password" type="password" placeholder="Your password")
+        span(slot="prepend")
+          Icon(type="locked")
+
+    Form-item(prop="passwordCheck")
+      Input(v-model="formSignUp.passwordCheck" type="password" placeholder="Enter Your Password confirmation")
+          span(slot="prepend")
+            Icon(type="locked")
+
+    Button(type="primary" @click="handleSubmit('formSignUp')") Sign Up
+    Button(type="ghost" @click="handleReset('formSignUp')") Cancel
 </template>
 
 <script>
