@@ -11,5 +11,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
+.ivu-card
+  margin: 8px 0
 </style>
