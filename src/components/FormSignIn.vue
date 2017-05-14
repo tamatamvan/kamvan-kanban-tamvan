@@ -1,18 +1,17 @@
-<template lang="html">
-  <Form ref="formSignIn" :model="formSignIn" :rules="ruleSignIn">
-    <Form-item prop="email">
-      <Input v-model="formSignIn.email" type="text" placeholder="Your Email Address">
-          <span slot="prepend"><Icon type="at"></Icon></span>
-      </Input>
-    </Form-item>
-    <Form-item prop="password">
-      <Input v-model="formSignIn.password" type="password" placeholder="Your password">
-          <span slot="prepend"><Icon type="locked"></Icon></span>
-      </Input>
-    </Form-item>
-    <Button type="primary" @click="handleSubmit('formSignIn')">Sign In</Button>
-    <Button type="ghost" @click="handleReset('formSignIn')">Cancel</Button>
-  </Form>
+<template lang="jade">
+  Form(ref="formSignIn" v-bind:model="formSignIn" v-bind:rules="ruleSignIn")
+    Form-item(prop="email")
+      Input(v-model="formSignIn.email" type="text" placeholder="Your Email Address")
+        span(slot="prepend")
+          Icon(type="at")
+            
+    Form-item(prop="password")
+      Input(v-model="formSignIn.password" type="password" placeholder="Your password")
+        span(slot="prepend")
+          Icon(type="locked")
+
+    Button(type="primary" @click="handleSubmit('formSignIn')") Sign In
+    Button(type="ghost" @click="handleReset('formSignIn')") Cancel
 </template>
 
 <script>

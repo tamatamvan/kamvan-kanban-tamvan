@@ -1,7 +1,6 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+<template lang="jade">
+  #app
+    router-view
 </template>
 
 <script>
@@ -10,8 +9,7 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: #eee;
-}
+<style lang="stylus">
+body
+  background-color: #eee
 </style>
