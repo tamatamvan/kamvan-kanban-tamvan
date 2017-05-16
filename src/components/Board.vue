@@ -6,7 +6,7 @@
       Col
         Button(type="primary", @click="newTaskModal = true") New Task
 
-    FormNewTask(:show="newTaskModal", @close="newTaskModal = false")
+    FormNewTask(:show="newTaskModal", @close="newTaskModal = false", @submitTask="submitTask")
 
     Row(v-bind:gutter="16")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
@@ -61,6 +61,12 @@ export default {
     },
     done () {
       return this.tasks.filter((task) => task.status === 3)
+    }
+  },
+  methods: {
+    submitTask (data) {
+      tasksRef.push(data)
+      this.$Message.success('New task has been added!')
     }
   }
 }

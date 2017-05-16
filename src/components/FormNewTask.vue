@@ -69,7 +69,10 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('New task has been added!')
+          this.formNewTask.point = parseInt(this.formNewTask.point)
+          this.formNewTask.status = 0
+          this.$emit('submitTask', this.formNewTask)
+          this.$refs[name].resetFields()
         } else {
           this.$Message.error('Please check your form input!')
         }
@@ -78,7 +81,6 @@ export default {
     },
     handleCancel (name) {
       this.$refs[name].resetFields()
-      this.$Message.success('Bye!')
       this.emitClose()
     },
     emitClose () {
