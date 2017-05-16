@@ -32,23 +32,29 @@
             Poptip(v-if="currentTask.status != 0",
             confirm,
             title="Are you sure want to set this task as 'Doing'?",
+            okText="Yes I'm sure!",
+            cancelText="No, cancel!",
             @on-ok="prev",
-            @on-cancel="detailTaskModal = false"
+            @on-cancel="closeDetailTaskModal"
             )
               Button(type="warning" size="large" long) Prev
           Col
             Poptip(confirm,
             title="Are you sure want to delete this task?",
+            okText="Yes I'm sure!",
+            cancelText="No, cancel!",
             @on-ok="deleteTask",
-            @on-cancel="detailTaskModal = false"
+            @on-cancel="closeDetailTaskModal"
             )
               Button(type="error" size="large" long) Delete
           Col
             Poptip(v-if="currentTask.status != 3",
             confirm,
             title="Are you sure want to set this task as 'To-Do'?",
+            okText="Yes I'm sure!",
+            cancelText="No, cancel!",
             @on-ok="next",
-            @on-cancel="detailTaskModal = false"
+            @on-cancel="closeDetailTaskModal"
             )
               Button(type="success" size="large" long) Next
 
@@ -69,12 +75,8 @@ import FormNewTask from './FormNewTask'
 import * as firebase from 'firebase'
 
 const config = {
-  apiKey: 'AIzaSyDOdqkhCFuTjkA6evws6sTZfVq1RVDSygk',
-  authDomain: 'kamvan-6aa69.firebaseapp.com',
   databaseURL: 'https://kamvan-6aa69.firebaseio.com',
-  projectId: 'kamvan-6aa69',
-  storageBucket: 'kamvan-6aa69.appspot.com',
-  messagingSenderId: '1033001407327'
+  projectId: 'kamvan-6aa69'
 }
 
 const firebaseApp = firebase.initializeApp(config)
@@ -168,15 +170,32 @@ export default {
       tasksRef.child(this.currentTask['.key'])
       .child('status')
       .set(newStatus)
+      this.closeDetailTaskModal()
     },
     prev () {
       const newStatus = this.currentTask.status - 1
       tasksRef.child(this.currentTask['.key'])
       .child('status')
       .set(newStatus)
+      this.closeDetailTaskModal()
     },
     deleteTask () {
       tasksRef.child(this.currentTask['.key']).remove()
+      this.detailTaskModal = false
+      this.closeDetailTaskModal()
+    },
+    closeDetailTaskModal () {
+      this.detailTaskModal = false
+      this.clearCurrentTask()
+    },
+    clearCurrentTask () {
+      this.currentTask = {
+        title: null,
+        desc: null,
+        point: null,
+        assignedTo: null,
+        status: null
+      }
     }
   }
 }
