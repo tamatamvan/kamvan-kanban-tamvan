@@ -39,7 +39,7 @@
           Col
             Poptip(confirm,
             title="Are you sure want to delete this task?",
-            @on-ok="detailTaskModal = false",
+            @on-ok="deleteTask",
             @on-cancel="detailTaskModal = false"
             )
               Button(type="error" size="large" long) Delete
@@ -116,17 +116,40 @@ export default {
     },
     currentStatusText () {
       switch (this.currentTask.status) {
+        case 0:
+          return 'Back Log'
         case 1:
-          return 'Back-Log'
+          return 'To Do'
+        case 2:
+          return 'Doing'
+        case 3:
+          return 'Done'
+        default:
+          return 'Back Log'
+      }
+    },
+    prevText () {
+      switch (this.currentTask.status) {
+        case 1:
+          return 'Back Log'
         case 2:
           return 'To Do'
         case 3:
           return 'Doing'
-        case 4:
+        default:
+          return 'Back log'
+      }
+    },
+    nextText () {
+      switch (this.currentTask.status) {
+        case 0:
+          return 'To Do'
+        case 1:
+          return 'Doing'
+        case 2:
           return 'Done'
         default:
-          return 'back-log'
-
+          return 'Done'
       }
     }
   },
@@ -140,14 +163,20 @@ export default {
       this.detailTaskModal = true
     },
     next () {
+      const newStatus = this.currentTask.status + 1
+      console.log('newStatus ', newStatus)
       tasksRef.child(this.currentTask['.key'])
       .child('status')
-      .set(this.currentTask.status++)
+      .set(newStatus)
     },
     prev () {
+      const newStatus = this.currentTask.status - 1
       tasksRef.child(this.currentTask['.key'])
       .child('status')
-      .set(this.currentTask.status--)
+      .set(newStatus)
+    },
+    deleteTask () {
+      tasksRef.child(this.currentTask['.key']).remove()
     }
   }
 }
