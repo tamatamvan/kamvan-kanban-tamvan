@@ -1,8 +1,8 @@
 <template lang="jade">
 Card(:class="classSection")
   p(slot="title") {{ title }}
-  draggable(class="dragArea", v-model="tasks", :options="{group:'taskList'}")
-    BoardCard(v-for="(task, index) in tasks", :task="task", :key="index")
+  //- draggable(class="dragArea", v-model="tasks", :options="{group:'taskList'}")
+  BoardCard(v-for="(task, index) in tasks", :task="task", :key="index", @showDetail="showDetail")
 </template>
 
 <script>
@@ -31,6 +31,11 @@ export default {
     },
     tasksSection () {
       return this.tasks
+    }
+  },
+  methods: {
+    showDetail (task) {
+      this.$emit('showDetail', task)
     }
   }
 }

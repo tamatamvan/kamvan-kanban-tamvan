@@ -3,11 +3,17 @@
     p(slot="title") {{ task.title }}
     p Point: {{ task.point }}
     p Assigned To: {{ task.assignedTo }}
+    Button(type="primary", @click="showDetail") Show Detail
 </template>
 
 <script>
 export default {
-  props: ['task']
+  props: ['task'],
+  methods: {
+    showDetail () {
+      this.$emit('showDetail', this.task)
+    }
+  }
 }
 </script>
 

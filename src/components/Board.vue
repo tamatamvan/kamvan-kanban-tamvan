@@ -26,13 +26,13 @@
 
     Row(v-bind:gutter="16")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
-        BoardSection(title="Un-Assigned Task", :tasks="unassigned")
+        BoardSection(title="Un-Assigned Task", :tasks="unassigned" @showDetail="showDetail")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
-        BoardSection(title="To-Do", :tasks="todo")
+        BoardSection(title="To-Do", :tasks="todo" @showDetail="showDetail")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
-        BoardSection(title="Doing", :tasks="doing")
+        BoardSection(title="Doing", :tasks="doing" @showDetail="showDetail")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
-        BoardSection(title="Done", :tasks="done")
+        BoardSection(title="Done", :tasks="done" @showDetail="showDetail")
 </template>
 
 <script>
@@ -91,6 +91,10 @@ export default {
     submitTask (data) {
       tasksRef.push(data)
       this.$Message.success('New task has been added!')
+    },
+    showDetail (task) {
+      this.currentTask = task
+      this.detailTaskModal = true
     }
   }
 }
