@@ -9,24 +9,52 @@
     FormNewTask(:show="newTaskModal", @close="newTaskModal = false", @submitTask="submitTask")
 
     Modal(v-model="detailTaskModal",
-      :title="'Detail Task' + currentTask.title + ' for ' + currentTask.assignedTo",
       cancelText="Close",
       @on-cancel="detailTaskModal = false")
+      p(slot="header", style="text-align:center; font-size:14px")
+        Icon(type="information-circled")
+        span Detail Task: {{ currentTask.title }} for {{ currentTask.assignedTo }}
       h3 Task Description :
-      br
       p {{ currentTask.desc }}
+      br
 
       h3 Point :
-      br
       p {{ currentTask.point }}
+      br
 
       h3 Status :
+      p {{ currentStatusText }}
       br
-      p {{ currentTask.status }}
+
+      div(slot="footer")
+        Row(type="flex", justify="space-between", align="middle")
+          Col
+            Poptip(v-if="currentTask.status != 0",
+            confirm,
+            title="Are you sure want to set this task as 'Doing'?",
+            @on-ok="prev",
+            @on-cancel="detailTaskModal = false"
+            )
+              Button(type="warning" size="large" long) Prev
+          Col
+            Poptip(confirm,
+            title="Are you sure want to delete this task?",
+            @on-ok="detailTaskModal = false",
+            @on-cancel="detailTaskModal = false"
+            )
+              Button(type="error" size="large" long) Delete
+          Col
+            Poptip(v-if="currentTask.status != 3",
+            confirm,
+            title="Are you sure want to set this task as 'To-Do'?",
+            @on-ok="next",
+            @on-cancel="detailTaskModal = false"
+            )
+              Button(type="success" size="large" long) Next
 
     Row(v-bind:gutter="16")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
-        BoardSection(title="Un-Assigned Task", :tasks="unassigned" @showDetail="showDetail")
+        BoardSection(title="Back-Log", :tasks="backlog" @showDetail="showDetail")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
         BoardSection(title="To-Do", :tasks="todo" @showDetail="showDetail")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
@@ -74,7 +102,7 @@ export default {
     }
   },
   computed: {
-    unassigned () {
+    backlog () {
       return this.tasks.filter((task) => task.status === 0)
     },
     todo () {
@@ -85,6 +113,21 @@ export default {
     },
     done () {
       return this.tasks.filter((task) => task.status === 3)
+    },
+    currentStatusText () {
+      switch (this.currentTask.status) {
+        case 1:
+          return 'Back-Log'
+        case 2:
+          return 'To Do'
+        case 3:
+          return 'Doing'
+        case 4:
+          return 'Done'
+        default:
+          return 'back-log'
+
+      }
     }
   },
   methods: {
@@ -95,6 +138,16 @@ export default {
     showDetail (task) {
       this.currentTask = task
       this.detailTaskModal = true
+    },
+    next () {
+      tasksRef.child(this.currentTask['.key'])
+      .child('status')
+      .set(this.currentTask.status++)
+    },
+    prev () {
+      tasksRef.child(this.currentTask['.key'])
+      .child('status')
+      .set(this.currentTask.status--)
     }
   }
 }

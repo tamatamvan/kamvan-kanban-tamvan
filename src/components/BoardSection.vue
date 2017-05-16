@@ -17,8 +17,8 @@ export default {
   computed: {
     classSection () {
       switch (this.title) {
-        case 'Un-Assigned Task':
-          return 'unassigned'
+        case 'Back Log':
+          return 'back-log'
         case 'To-Do':
           return 'to-do'
         case 'Doing':
@@ -26,7 +26,7 @@ export default {
         case 'Done':
           return 'done'
         default:
-          return 'unassigned'
+          return 'back-log'
       }
     },
     tasksSection () {
@@ -44,7 +44,7 @@ export default {
 <style lang="stylus">
 .ivu-card-head
   border-radius: 4px 4px 0px 0px
-.unassigned > .ivu-card-head
+.back-log > .ivu-card-head
   background-color: #ff3300
   p
     color: #fff
