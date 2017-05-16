@@ -8,6 +8,22 @@
 
     FormNewTask(:show="newTaskModal", @close="newTaskModal = false", @submitTask="submitTask")
 
+    Modal(v-model="detailTaskModal",
+      :title="'Detail Task' + currentTask.title + ' for ' + currentTask.assignedTo",
+      cancelText="Close",
+      @on-cancel="detailTaskModal = false")
+      h3 Task Description :
+      br
+      p {{ currentTask.desc }}
+
+      h3 Point :
+      br
+      p {{ currentTask.point }}
+
+      h3 Status :
+      br
+      p {{ currentTask.status }}
+
     Row(v-bind:gutter="16")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
         BoardSection(title="Un-Assigned Task", :tasks="unassigned")
@@ -46,7 +62,15 @@ export default {
   },
   data () {
     return {
-      newTaskModal: false
+      newTaskModal: false,
+      detailTaskModal: false,
+      currentTask: {
+        title: null,
+        desc: null,
+        point: null,
+        assignedTo: null,
+        status: null
+      }
     }
   },
   computed: {
