@@ -31,13 +31,13 @@
           Col
             Poptip(v-if="currentTask.status != 0",
             confirm,
-            title="Are you sure want to set this task as 'Doing'?",
+            :title="'Mark this task as ' + prevText + '?'",
             okText="Yes I'm sure!",
             cancelText="No, cancel!",
             @on-ok="prev",
             @on-cancel="closeDetailTaskModal"
             )
-              Button(type="warning" size="large" long) Prev
+              Button(type="warning" size="large" long) {{ prevText }}
           Col
             Poptip(confirm,
             title="Are you sure want to delete this task?",
@@ -50,13 +50,13 @@
           Col
             Poptip(v-if="currentTask.status != 3",
             confirm,
-            title="Are you sure want to set this task as 'To-Do'?",
+            :title="'Mark this task as ' + nextText + '?'",
             okText="Yes I'm sure!",
             cancelText="No, cancel!",
             @on-ok="next",
             @on-cancel="closeDetailTaskModal"
             )
-              Button(type="success" size="large" long) Next
+              Button(type="success" size="large" long) {{ nextText }}
 
     Row(v-bind:gutter="16")
       Col(:xs="24", :sm="24", :md="6", :lg="6")
@@ -166,7 +166,6 @@ export default {
     },
     next () {
       const newStatus = this.currentTask.status + 1
-      console.log('newStatus ', newStatus)
       tasksRef.child(this.currentTask['.key'])
       .child('status')
       .set(newStatus)
