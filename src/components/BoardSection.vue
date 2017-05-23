@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
 Card(:class="classSection")
   p(slot="title") {{ title }}
   //- draggable(class="dragArea", v-model="tasks", :options="{group:'taskList'}")

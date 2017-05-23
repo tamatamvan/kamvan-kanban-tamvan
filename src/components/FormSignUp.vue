@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
   Form(:model="formSignUp", :rules="ruleSignUp", ref="formSignUp")
     Form-item(prop="name")
       Input(v-model="formSignUp.name" type="text" placeholder="Your Full Name")

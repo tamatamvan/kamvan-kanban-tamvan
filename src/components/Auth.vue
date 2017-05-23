@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
   div(id="sign-in-up")
     h1 KAMVAN - The Simple Kanban Tamvan!
     Row(type="flex", justify="center", align="middle")

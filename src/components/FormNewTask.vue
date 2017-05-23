@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
 Modal(v-model="showModal",
   title="New Task",
   okText="Save",

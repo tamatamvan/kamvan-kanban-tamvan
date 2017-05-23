@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
   Form(ref="formSignIn", :model="formSignIn", :rules="ruleSignIn")
     Form-item(prop="email")
       Input(v-model="formSignIn.email" type="text" placeholder="Your Email Address")

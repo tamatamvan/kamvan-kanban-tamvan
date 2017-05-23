@@ -1,4 +1,4 @@
-<template lang="jade">
+<template lang="pug">
   Card(:class="task.status")
     p(slot="title") {{ task.title }}
     p Point: {{ task.point }}
